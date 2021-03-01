@@ -1,7 +1,7 @@
 FROM node:12.21.0
 
-RUN apk update \
-    && apk add vim
+RUN apt-get update \
+    && apt-get install -y vim
 
 RUN npm install -g pm2 \
     && pm2 install pm2-logrotate@latest \
@@ -11,10 +11,9 @@ ARG DISABLE_CACHE
 
 RUN echo $DISABLE_CACHE
 
-RUN mkdir -p /var/www \
-    && cd /var/www \
-    && git clone --depth 1 https://github.com/postlude/node-sample.git --branch master --single-branch \
-    && cd node-sample \
+RUN mkdir -p /var/www/node-sample
+COPY . /var/www/node-sample
+RUN cd /var/www/node-sample \
     && npm i
 
 WORKDIR /var/www/node-sample
