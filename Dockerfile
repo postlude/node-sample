@@ -26,7 +26,7 @@ RUN echo $DISABLE_CACHE
 RUN mkdir -p /var/www \
     && cd /var/www \
     && git clone --depth 1 https://github.com/postlude/node-sample.git --branch master --single-branch \
-    && cd postlude-api \
+    && cd node-sample \
     && npm i
 
 WORKDIR /var/www/node-sample
