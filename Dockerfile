@@ -1,19 +1,7 @@
-FROM centos:7
+FROM node:12.21.0
 
-RUN yum clean all \
-    && yum -y update \
-    && yum -y install vim curl ntp git
-
-ENV HOME /root
-ENV NVM_DIR $HOME/.nvm
-RUN mkdir $NVM_DIR && curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-
-ENV NODE_VERSION 12.19.0
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
-RUN source ~/.bash_profile \
-    && nvm install $NODE_VERSION \
-    && nvm alias default $NODE_VERSION \
-    && nvm use default
+RUN apk update \
+    && apk add vim
 
 RUN npm install -g pm2 \
     && pm2 install pm2-logrotate@latest \
