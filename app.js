@@ -2,7 +2,8 @@ require('module-alias/register');
 
 const express = require('express');
 const morgan = require('morgan');
-const { sleep } = require('@/util/helper');
+const mongoose = require('mongoose');
+const Test = require('./model/test')
 
 const app = express();
 const port = 3000;
@@ -12,22 +13,28 @@ app.use(morgan('dev'));
 
 app.get('/', async (req, res) => {
     try {
-        const { ms } = req.query;
-
-        console.log('get');
-        await sleep(ms);
-        res.sendStatus(200);
+        const result = await Test.findOne(
+            Test.translateAliases({
+                txt: 'a'
+            }),
+            'str' // alias
+        );
+        console.log(result);
+        res.send(result);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
 });
 
-app.post('/post', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
-        const { a } = req.body;
-
-        console.log(a);
+        const test = new Test({
+            str: 'a',
+            num: 1
+        });
+        console.log(test.txt);
+        await test.save();
         res.sendStatus(200);
     } catch (err) {
         console.error(err);
@@ -38,5 +45,11 @@ app.post('/post', async (req, res) => {
 app.listen(port, async () => {
     console.log('==================== [NODE SAMPLE] ====================');
     console.log(`- PORT : ${port}`);
+    await mongoose.connect('mongodb://localhost:27017/testdb', {
+        user: 'postlude',
+        pass: 'postlude',
+        useNewUrlParser: true, // to fix deprecation warning
+        useUnifiedTopology: true // to fix deprecation warning
+    });
     console.log('========================================================');
 });
