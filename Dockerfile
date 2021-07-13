@@ -1,7 +1,4 @@
-FROM node:12.21.0
-
-RUN apt-get update \
-    && apt-get install -y vim
+FROM node:14
 
 RUN npm install -g pm2 \
     && pm2 install pm2-logrotate@latest \
@@ -9,13 +6,4 @@ RUN npm install -g pm2 \
 
 ARG DISABLE_CACHE
 
-RUN echo $DISABLE_CACHE
-
-RUN mkdir -p /var/www/node-sample
-COPY . /var/www/node-sample
-RUN cd /var/www/node-sample \
-    && npm i
-
-WORKDIR /var/www/node-sample
-
-CMD [ "pm2-runtime", "start", "ecosystem.config.js"]
+RUN pm2 -v
