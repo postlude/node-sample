@@ -1,5 +1,0 @@
-#!/bin/bash
-
-CUR_TIME=$(date +%s)
-
-docker build --build-arg DISABLE_CACHE=$CUR_TIME -t $IMAGE_NAME .

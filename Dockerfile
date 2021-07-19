@@ -1,9 +1,15 @@
 FROM node:14
 
+ENV SERVER_HOME /node-sample
+
 RUN npm install -g pm2 \
     && pm2 install pm2-logrotate@latest \
     && pm2 set pm2-logrotate:rotateInterval '0 0 * * *'
 
-ARG DISABLE_CACHE
+RUN mkdir ${SERVER_HOME}
 
-RUN pm2 -v
+COPY ./* ${SERVER_HOME}
+
+WORKDIR ${SERVER_HOME}
+
+CMD [ "pm2-runtime", "start", "ecosystem.config.js"]

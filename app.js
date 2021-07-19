@@ -45,11 +45,11 @@ app.post('/', async (req, res) => {
 app.listen(port, async () => {
     console.log('==================== [NODE SAMPLE] ====================');
     console.log(`- PORT : ${port}`);
-    await mongoose.connect('mongodb://localhost:27017/testdb', {
-        user: 'postlude',
-        pass: 'postlude',
-        useNewUrlParser: true, // to fix deprecation warning
-        useUnifiedTopology: true // to fix deprecation warning
-    });
+    // await mongoose.connect('mongodb://localhost:27017/testdb', {
+    //     user: 'postlude',
+    //     pass: 'postlude',
+    //     useNewUrlParser: true, // to fix deprecation warning
+    //     useUnifiedTopology: true // to fix deprecation warning
+    // });
     console.log('========================================================');
 });
