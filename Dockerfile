@@ -8,7 +8,7 @@ RUN npm install -g pm2 \
 
 RUN mkdir ${SERVER_HOME}
 
-COPY ./* ${SERVER_HOME}
+COPY . ${SERVER_HOME}
 
 WORKDIR ${SERVER_HOME}
 
