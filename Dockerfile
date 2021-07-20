@@ -12,8 +12,8 @@ COPY . ${SERVER_HOME}
 
 WORKDIR ${SERVER_HOME}
 
-RUN ls -al ${SERVER_HOME}
+# RUN ls -al ${SERVER_HOME}
 
 RUN npm i
 
-CMD [ "pm2-runtime", "start", "ecosystem.config.js"]
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]

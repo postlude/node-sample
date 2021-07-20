@@ -1,5 +1,5 @@
 {
-    "name": "sample",
+    "name": "node-sample",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
@@ -11,8 +11,6 @@
     "license": "ISC",
     "dependencies": {
         "express": "^4.17.1",
-        "module-alias": "^2.2.2",
-        "mongoose": "^5.12.5",
         "morgan": "^1.10.0"
     },
     "_moduleAliases": {
